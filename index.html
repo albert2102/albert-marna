@@ -1,759 +1,139 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>دعوة خطوبة البرت و مرنا</title>
-<meta name="theme-color" content="#FDF2F3">
-<meta property="og:title" content="دعوة خطوبة البرت و مرنا">
-<meta property="og:description" content="٢٤ سبتمبر ٢٠٢٦ — كنيسة مارجرجس بأسيوط">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
-<style>
-:root{
-  --cream:#FFFCF9; --blush1:#FDF2F3; --blush2:#F8E1E5; --blush3:#F0C9D2;
-  --rose:#DFA0AE; --rose-deep:#B9707F; --rose-ink:#96566A;
-  --green:#A3B48F; --green-deep:#7E9270;
-  --ink:#5B4249; --muted:#AE8F97; --ribbon:#F6D3D9;
-  --ar-body:"Noto Naskh Arabic","Times New Roman",serif;
-  --ar-display:"Aref Ruqaa","Noto Naskh Arabic",serif;
-  --en-body:"EB Garamond",Georgia,serif;
-  --en-display:"Pinyon Script",cursive;
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:var(--ar-body);font-size:18px;line-height:1.9;color:var(--ink);
-  background:var(--blush1);overflow-x:hidden;
-}
-body[data-lang="en"]{font-family:var(--en-body);font-size:17px}
-body.locked{overflow:hidden;height:100vh}
-.rose-txt{
-  background:linear-gradient(100deg,var(--rose-ink),var(--rose-deep) 28%,#EFB9C5 52%,var(--rose-deep) 74%,var(--rose-ink));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.disp{font-family:var(--ar-display)}
-body[data-lang="en"] .disp{font-family:var(--en-display)}
-
-/* ===== background garden ===== */
-#garden{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
-#garden svg{width:100%;height:100%}
-main,section,footer,#cover,.lang{position:relative;z-index:2}
-
-/* ===== language ===== */
-.lang{
-  position:fixed;top:14px;left:14px;z-index:999;display:flex;
-  border:1px solid var(--blush3);border-radius:999px;overflow:hidden;
-  background:rgba(255,255,255,.82);backdrop-filter:blur(8px);
-  box-shadow:0 4px 14px rgba(160,110,120,.14);
-}
-.lang button{font:inherit;font-size:15px;padding:7px 14px;border:0;cursor:pointer;background:transparent;color:var(--rose-ink)}
-.lang button[aria-pressed="true"]{background:var(--rose);color:#fff}
-
-/* ===== cover ===== */
-#cover{
-  position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;
-  background:radial-gradient(70% 50% at 50% 40%,#FFFDFC,#FBEDEF 55%,#F3D8DE 100%);
-  transition:opacity .8s ease .5s,transform .8s ease .5s;
-}
-#cover.open{opacity:0;transform:scale(1.1);pointer-events:none}
-.env{position:relative;width:min(100%,520px);height:100vh}
-.env .art{position:absolute;inset:0}
-.flap{
-  position:absolute;top:0;left:0;right:0;height:44%;
-  background:linear-gradient(180deg,#FFFDFC,#F9E4E8);
-  clip-path:polygon(0 0,100% 0,50% 100%);
-  transform-origin:top center;transition:transform .85s cubic-bezier(.5,-0.15,.4,1);
-}
-#cover.open .flap{transform:rotateX(-115deg)}
-.seal{
-  position:absolute;top:41%;left:50%;transform:translate(-50%,-50%);
-  width:108px;height:108px;border:0;padding:0;border-radius:50%;cursor:pointer;
-  background:radial-gradient(circle at 36% 30%,#FFF6F7,#F3C9D2 45%,#E0A2B0 78%,#CC8A99);
-  box-shadow:0 10px 22px rgba(180,110,125,.3),inset 0 0 0 5px rgba(255,255,255,.4);
-  display:grid;place-items:center;transition:transform .5s ease,opacity .5s ease;
-}
-.seal span{font-family:var(--en-display);font-size:38px;color:#8E4E5F;line-height:1;padding-bottom:6px}
-#cover.open .seal{transform:translate(-50%,-50%) scale(1.3) rotate(8deg);opacity:0}
-.tap{
-  position:absolute;bottom:calc(11vh + env(safe-area-inset-bottom));left:0;right:0;text-align:center;
-  color:var(--muted);font-size:17px;animation:pulse 2.6s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
-
-/* ===== sections ===== */
-section{padding:76px 22px;max-width:560px;margin:0 auto}
-h2.title{text-align:center;margin:0;font-weight:400;font-size:38px;line-height:1.7;font-family:var(--ar-display)}
-body[data-lang="en"] h2.title{font-family:var(--en-display);font-size:40px;line-height:1.2}
-.rule{display:flex;align-items:center;gap:12px;margin:14px auto 32px;max-width:230px;color:var(--rose)}
-.rule:before,.rule:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--blush3),transparent)}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s cubic-bezier(.22,.7,.3,1)}
-.reveal.in{opacity:1;transform:none}
-
-/* ===== hero ===== */
-#hero{padding:0;max-width:none;height:100svh;min-height:580px;display:grid;place-items:center;overflow:hidden}
-.hero-art{position:absolute;inset:0;width:100%;height:100%}
-.hero-txt{position:relative;text-align:center;padding:0 28px;margin-top:6vh}
-.hero-txt .welcome{font-size:18px;color:#8A6C74;margin:0 0 2px}
-.hero-txt .occasion{font-size:30px;margin:0;font-family:var(--ar-display);line-height:1.8}
-body[data-lang="en"] .hero-txt .occasion{font-family:var(--en-display);font-size:34px;line-height:1.2}
-.hero-names{display:flex;align-items:center;justify-content:center;gap:14px;margin:12px 0 0}
-.hero-names h1{font-family:var(--ar-display);font-size:42px;margin:0;line-height:1.8;white-space:nowrap}
-body[data-lang="en"] .hero-names h1{font-family:var(--en-display);font-size:48px;line-height:1.25}
-.scroll-cue{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#8A6C74;font-size:17px}
-.scroll-cue svg{display:block;margin:2px auto 0;animation:bob 2.2s ease-in-out infinite;color:var(--rose)}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
-
-/* ===== scratch date ===== */
-.hint{text-align:center;color:var(--rose-ink);font-size:17px;margin:0 0 18px}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.tile{
-  position:relative;aspect-ratio:3/3.6;border-radius:6px 20px 6px 20px;overflow:hidden;
-  border:1px solid var(--blush3);background:linear-gradient(180deg,#FFFDFC,#FAE7EB);display:grid;place-items:center;
-}
-.tile .val{font-family:var(--ar-display);font-size:25px;color:var(--rose-ink);text-align:center;padding:0 4px;line-height:1.7}
-body[data-lang="en"] .tile .val{font-family:var(--en-body);font-size:21px}
-.tile canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:pointer}
-.tile.done canvas{opacity:0;transition:opacity .55s ease;pointer-events:none}
-.tkeys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
-.tkeys span{text-align:center;font-size:14px;color:var(--muted);letter-spacing:.12em}
-.reveal-all{display:block;margin:18px auto 0;font:inherit;font-size:16px;cursor:pointer;background:none;border:0;color:var(--muted);border-bottom:1px solid var(--blush3);padding:2px 0}
-
-/* ===== invitation arch ===== */
-.arch{
-  position:relative;margin:0 auto;max-width:400px;padding:58px 26px 40px;text-align:center;
-  background:linear-gradient(180deg,#FFFDFC,#FBEBEE);
-  border:1px solid var(--blush3);border-radius:190px 190px 12px 12px;
-  box-shadow:0 16px 40px rgba(180,120,135,.16);
-}
-.arch:before{content:"";position:absolute;inset:9px;border:1px solid rgba(223,160,174,.4);border-radius:182px 182px 6px 6px;pointer-events:none}
-.cross{display:block;margin:0 auto 12px;color:var(--rose)}
-.verse{font-size:19px;line-height:2;margin:0 0 4px;color:#6B4F58}
-body[data-lang="en"] .verse{font-size:18px;font-style:italic}
-.verse-ref{font-size:15px;color:var(--muted);margin:0 0 24px}
-.arch .inv{font-size:18px;line-height:2;color:#7A5B65;margin:0 0 10px}
-body[data-lang="en"] .arch .inv{font-size:14px;letter-spacing:.16em;text-transform:uppercase}
-.who{display:flex;justify-content:center;gap:12px;align-items:center;margin:6px 0 0}
-.who h3{font-family:var(--ar-display);font-size:32px;margin:0;line-height:1.8;white-space:nowrap}
-body[data-lang="en"] .who h3{font-family:var(--en-display);font-size:36px;line-height:1.25}
-.fathers{display:flex;justify-content:center;gap:8px;margin:20px 0 0;flex-wrap:wrap}
-.fathers div{flex:1 1 150px;min-width:145px}
-.fathers .k{font-size:16px;color:var(--rose-deep);margin:0 0 2px}
-.fathers .v{font-size:17px;margin:0;line-height:1.8;color:#6B4F58}
-
-/* ===== timeline ===== */
-.tl{position:relative;margin:0 auto;max-width:430px}
-.tl:before{content:"";position:absolute;top:6px;bottom:6px;left:50%;width:1px;background:linear-gradient(180deg,transparent,var(--blush3) 10%,var(--blush3) 90%,transparent)}
-.stop{position:relative;display:flex;padding:18px 0}
-.stop .box{width:50%;padding-inline-end:26px;text-align:end}
-.stop:nth-child(even){justify-content:flex-end}
-.stop:nth-child(even) .box{padding-inline-end:0;padding-inline-start:26px;text-align:start}
-.stop .t{font-family:var(--ar-display);font-size:24px;color:var(--rose-ink);margin:0 0 2px;line-height:1.7}
-body[data-lang="en"] .stop .t{font-family:var(--en-body);font-size:21px}
-.stop .d{font-size:17px;margin:0;line-height:1.7;color:#6B4F58}
-.stop:after{content:"";position:absolute;top:26px;left:50%;width:10px;height:10px;transform:translateX(-50%) rotate(45deg);background:var(--cream);border:1px solid var(--rose)}
-
-/* ===== venue ===== */
-.venue{text-align:center}
-.venue .city{font-size:15px;letter-spacing:.2em;color:var(--muted);margin:0 0 6px}
-.venue .name{font-size:23px;line-height:1.7;margin:0 0 4px;color:#6B4F58}
-.venue .addr{font-size:16px;color:var(--muted);margin:0}
-.mapwrap{margin:22px auto 0;border:1px solid var(--blush3);border-radius:8px 26px 8px 26px;overflow:hidden;background:#F6E6E9;box-shadow:0 12px 28px rgba(180,120,135,.16)}
-.mapwrap iframe{display:block;width:100%;height:260px;border:0}
-.mapwrap .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 15px;font-size:16px;background:rgba(255,255,255,.72);border-top:1px solid rgba(240,201,210,.9)}
-.mapwrap .bar a{color:var(--rose-ink);text-decoration:none;border-bottom:1px solid var(--blush3);white-space:nowrap}
-.mapfallback{display:none;padding:26px 18px;text-align:center;color:var(--muted);font-size:16px}
-.mapwrap.failed iframe{display:none}
-.mapwrap.failed .mapfallback{display:block}
-
-/* ===== countdown / actions ===== */
-.count{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;max-width:360px;margin:0 auto;direction:ltr}
-.cbox{padding:14px 4px 11px;text-align:center;border-radius:4px 16px 4px 16px;border:1px solid rgba(240,201,210,.9);background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(248,225,229,.65))}
-.cbox b{display:block;font-family:var(--en-body);font-size:25px;font-weight:500;color:var(--rose-ink)}
-.cbox small{display:block;margin-top:3px;font-size:13px;color:var(--muted)}
-.done-msg{text-align:center;font-size:22px;color:var(--rose-ink)}
-.acts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:28px}
-.btn{
-  font:inherit;font-size:18px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
-  padding:12px 22px;border-radius:999px;text-decoration:none;
-  border:1px solid var(--blush3);background:rgba(255,255,255,.6);color:var(--rose-ink);transition:background .25s ease;
-}
-body[data-lang="en"] .btn{font-size:16px}
-.btn:hover,.btn:focus-visible{background:rgba(223,160,174,.16)}
-.btn.solid{background:linear-gradient(135deg,var(--rose-ink),var(--rose));color:#fff;border-color:transparent}
-.closing{text-align:center;font-size:20px;color:#6B4F58;margin:0}
-body[data-lang="en"] .closing{font-style:italic;font-size:19px}
-footer{padding:0 22px calc(64px + env(safe-area-inset-bottom));text-align:center}
-footer .m{font-family:var(--en-display);font-size:32px;color:var(--rose);display:block;margin-bottom:4px}
-
-dialog{border:1px solid var(--blush3);border-radius:8px 28px 8px 28px;background:var(--blush1);color:var(--ink);padding:26px 22px;max-width:min(420px,92vw);width:100%;font-family:inherit}
-dialog::backdrop{background:rgba(91,66,73,.5)}
-dialog h3{margin:0 0 4px;font-size:27px;font-weight:400;text-align:center;font-family:var(--ar-display)}
-body[data-lang="en"] dialog h3{font-family:var(--en-display)}
-dialog .sub{margin:0 0 14px;text-align:center;color:var(--muted);font-size:16px}
-label{display:block;font-size:16px;color:var(--muted);margin:14px 0 6px}
-input{width:100%;font:inherit;font-size:18px;padding:11px 12px;border-radius:9px;border:1px solid rgba(223,160,174,.5);background:rgba(255,255,255,.75);color:var(--ink)}
-input:focus{outline:2px solid var(--rose);outline-offset:1px}
-.choice{display:flex;gap:8px;margin-top:6px}
-.choice button{flex:1;font:inherit;font-size:17px;padding:11px 6px;cursor:pointer;border-radius:9px;border:1px solid rgba(223,160,174,.5);background:rgba(255,255,255,.7);color:var(--ink)}
-.choice button[aria-pressed="true"]{background:var(--rose);color:#fff;border-color:var(--rose)}
-.dlg-acts{display:flex;gap:10px;margin-top:20px}
-.dlg-acts .btn{flex:1;justify-content:center}
-
-@media (max-width:360px){
-  .hero-names h1{font-size:34px}
-  .who h3{font-size:27px}
-}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .reveal{opacity:1;transform:none}
-  .scroll-cue svg,.tap{animation:none}
-  #cover,.flap,.seal{transition:none}
-}
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    body {background-color: #fceef0}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: left; font: 18.0px 'Helvetica Neue'; color: #483239; -webkit-text-stroke: #483239; min-height: 21.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #483239; -webkit-text-stroke: #483239; min-height: 21.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 15.0px 'Geeza Pro'; color: #ffffff; -webkit-text-stroke: #ffffff; background-color: #d68c9e}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 15.0px 'Helvetica Neue'; color: #834257; -webkit-text-stroke: #834257}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 34.0px 'Helvetica Neue'; color: #d68c9e; -webkit-text-stroke: #d68c9e}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 15.0px 'Geeza Pro'; color: #9d7b85; -webkit-text-stroke: #9d7b85}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 24.0px 'Geeza Pro'; color: #834257; -webkit-text-stroke: #834257}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 15.0px 'Geeza Pro'; color: #a95a6c; -webkit-text-stroke: #a95a6c}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 34.0px 'Helvetica Neue'; color: #7a3b4d; -webkit-text-stroke: #7a3b4d}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 17.0px 'Geeza Pro'; color: #9d7b85; -webkit-text-stroke: #9d7b85}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 18.0px 'Helvetica Neue'; color: #483239; -webkit-text-stroke: #483239; min-height: 21.0px}
+    p.p12 {margin: 0.0px 0.0px 2.0px 0.0px; text-align: center; font: 17.0px 'Geeza Pro'; color: #765861; -webkit-text-stroke: #765861}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 28.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239}
+    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 18.0px 'Helvetica Neue'; color: #d68c9e; -webkit-text-stroke: #d68c9e; min-height: 21.0px}
+    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 17.0px 'Geeza Pro'; color: #765861; -webkit-text-stroke: #765861}
+    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 17.0px 'Helvetica Neue'; color: #d68c9e; -webkit-text-stroke: #d68c9e; min-height: 20.0px}
+    p.p18 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #d68c9e; -webkit-text-stroke: #d68c9e; min-height: 21.0px}
+    p.p19 {margin: 0.0px 0.0px 18.0px 0.0px; text-align: center; font: 17.0px 'Geeza Pro'; color: #834257; -webkit-text-stroke: #834257}
+    p.p20 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 25.0px 'Geeza Pro'; color: #834257; -webkit-text-stroke: #834257}
+    p.p21 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 14.0px 'Geeza Pro'; color: #9d7b85; -webkit-text-stroke: #9d7b85}
+    p.p22 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 16.0px 'Geeza Pro'; color: #9d7b85; -webkit-text-stroke: #9d7b85}
+    p.p23 {margin: 0.0px 0.0px 4.0px 0.0px; text-align: center; font: 19.0px 'Geeza Pro'; color: #573d46; -webkit-text-stroke: #573d46}
+    p.p24 {margin: 0.0px 0.0px 24.0px 0.0px; text-align: center; font: 15.0px 'Geeza Pro'; color: #9d7b85; -webkit-text-stroke: #9d7b85}
+    p.p25 {margin: 0.0px 0.0px 10.0px 0.0px; text-align: center; font: 18.0px 'Geeza Pro'; color: #664852; -webkit-text-stroke: #664852}
+    p.p27 {margin: 0.0px 0.0px 2.0px 0.0px; text-align: center; font: 16.0px 'Geeza Pro'; color: #a95a6c; -webkit-text-stroke: #a95a6c}
+    p.p28 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 17.0px 'Geeza Pro'; color: #573d46; -webkit-text-stroke: #573d46}
+    p.p29 {margin: 0.0px 0.0px 2.0px 0.0px; font: 24.0px 'Geeza Pro'; color: #834257; -webkit-text-stroke: #834257}
+    p.p30 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Geeza Pro'; color: #573d46; -webkit-text-stroke: #573d46}
+    p.p31 {margin: 0.0px 0.0px 6.0px 0.0px; text-align: center; font: 15.0px 'Geeza Pro'; color: #9d7b85; -webkit-text-stroke: #9d7b85}
+    p.p32 {margin: 0.0px 0.0px 4.0px 0.0px; text-align: center; font: 23.0px 'Geeza Pro'; color: #573d46; -webkit-text-stroke: #573d46}
+    p.p33 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 16.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239}
+    p.p34 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 16.0px 'Geeza Pro'; color: #834257; -webkit-text-stroke: #834257}
+    p.p35 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Geeza Pro'; color: #834257; -webkit-text-stroke: #834257}
+    p.p36 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 32.0px 'Helvetica Neue'; color: #d68c9e; -webkit-text-stroke: #d68c9e}
+    p.p37 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 20.0px 'Geeza Pro'; color: #573d46; -webkit-text-stroke: #573d46}
+    span.s1 {font-kerning: none}
+    span.s2 {font-kerning: none; background-color: rgba(255, 255, 255, 0.82)}
+    span.s3 {font: 15.0px 'Helvetica Neue'; font-kerning: none}
+    span.s4 {font: 24.0px 'Helvetica Neue'; font-kerning: none}
+    span.s5 {font: 17.0px 'Helvetica Neue'; font-kerning: none}
+    span.s6 {font: 28.0px 'Helvetica Neue'; font-kerning: none}
+    span.s7 {font: 17.0px 'Zapf Dingbats'; font-kerning: none}
+    span.s8 {font: 16.0px 'Helvetica Neue'; font-kerning: none}
+    span.s9 {font: 19.0px 'Helvetica Neue'; font-kerning: none}
+    span.s10 {font: 18.0px 'Helvetica Neue'; font-kerning: none}
+    span.s11 {font: 38.0px 'Helvetica Neue'; font-kerning: none}
+    span.s12 {font: 23.0px 'Helvetica Neue'; font-kerning: none}
+    span.s13 {font-kerning: none; background-color: rgba(255, 255, 255, 0.72)}
+    span.s14 {font: 16.0px 'Helvetica Neue'; font-kerning: none; background-color: rgba(255, 255, 255, 0.72)}
+    span.s15 {font-kerning: none; color: #ffffff; -webkit-text-stroke: 0px #ffffff}
+    span.s16 {font: 18.0px 'Helvetica Neue'; font-kerning: none; color: #ffffff; -webkit-text-stroke: 0px #ffffff}
+    span.s17 {font: 18.0px 'Helvetica Neue'; font-kerning: none; color: #483239; -webkit-text-stroke: 0px #483239}
+    span.s18 {font-kerning: none; background-color: rgba(255, 255, 255, 0.6)}
+    span.s19 {font: 18.0px 'Helvetica Neue'; font-kerning: none; background-color: rgba(255, 255, 255, 0.6)}
+    span.s20 {font: 20.0px 'Helvetica Neue'; font-kerning: none}
+  </style>
 </head>
-<body data-lang="ar" class="locked">
-
-<!-- ============ shared flower art ============ -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <radialGradient id="gRose" cx=".38" cy=".32" r=".75">
-      <stop offset="0" stop-color="#FDF3F4"/><stop offset=".45" stop-color="#F6D6DC"/><stop offset="1" stop-color="#E9AEBB"/>
-    </radialGradient>
-    <radialGradient id="gRose2" cx=".38" cy=".32" r=".75">
-      <stop offset="0" stop-color="#FFFDFC"/><stop offset=".5" stop-color="#FAE6E9"/><stop offset="1" stop-color="#F0C6CF"/>
-    </radialGradient>
-    <linearGradient id="gLily" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4EDE6"/>
-    </linearGradient>
-    <linearGradient id="gLeaf" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#B4C4A2"/><stop offset="1" stop-color="#8CA07C"/>
-    </linearGradient>
-
-    <!-- pink garden rose, top view -->
-    <g id="rose">
-      <circle r="30" fill="url(#gRose)"/>
-      <g fill="#F3CBD4" opacity=".9">
-        <circle cx="0" cy="-21" r="11"/><circle cx="18" cy="-11" r="11"/><circle cx="18" cy="11" r="11"/>
-        <circle cx="0" cy="21" r="11"/><circle cx="-18" cy="11" r="11"/><circle cx="-18" cy="-11" r="11"/>
-      </g>
-      <circle r="17" fill="url(#gRose2)"/>
-      <g fill="none" stroke="#E5A9B6" stroke-width="1.1" opacity=".85">
-        <circle r="12"/><circle r="7.5"/><circle r="3.5"/>
-      </g>
-    </g>
-
-    <!-- white lily -->
-    <g id="lily">
-      <g fill="url(#gLily)" stroke="#EADFD6" stroke-width=".8">
-        <ellipse cx="0" cy="-20" rx="7.5" ry="21"/>
-        <ellipse cx="19" cy="-6" rx="7.5" ry="21" transform="rotate(72 19 -6)"/>
-        <ellipse cx="12" cy="17" rx="7.5" ry="21" transform="rotate(144 12 17)"/>
-        <ellipse cx="-12" cy="17" rx="7.5" ry="21" transform="rotate(216 12 17)"/>
-        <ellipse cx="-19" cy="-6" rx="7.5" ry="21" transform="rotate(288 -19 -6)"/>
-      </g>
-      <g stroke="#D9BFA6" stroke-width="1.1" fill="#C9A46B">
-        <path d="M0 0l-7 -12M0 0l7 -12M0 0l-10 4M0 0l10 4M0 0l0 13" fill="none"/>
-        <circle cx="-7" cy="-12" r="2"/><circle cx="7" cy="-12" r="2"/>
-        <circle cx="-10" cy="4" r="2"/><circle cx="10" cy="4" r="2"/><circle cx="0" cy="13" r="2"/>
-      </g>
-    </g>
-
-    <!-- gypsophila / pink baby's breath cluster -->
-    <g id="gyp" fill="#F2C7D0">
-      <circle cx="0" cy="0" r="3.4"/><circle cx="9" cy="-5" r="3"/><circle cx="-9" cy="-4" r="3"/>
-      <circle cx="5" cy="8" r="2.8"/><circle cx="-6" cy="8" r="2.6"/><circle cx="14" cy="4" r="2.4"/>
-      <circle cx="-14" cy="3" r="2.4"/><circle cx="0" cy="-11" r="2.6"/><circle cx="18" cy="-11" r="2.2"/>
-      <circle cx="-18" cy="-10" r="2.2"/><circle cx="10" cy="15" r="2.2"/><circle cx="-11" cy="16" r="2"/>
-      <circle cx="22" cy="6" r="2"/><circle cx="-22" cy="7" r="2"/>
-    </g>
-
-    <!-- leaf sprig -->
-    <g id="sprig" fill="url(#gLeaf)">
-      <path d="M0 0c14 2 24 12 28 26-16-2-26-12-28-26Z"/>
-      <path d="M0 0c-14 2-24 12-28 26 16-2 26-12 28-26Z"/>
-      <path d="M2 -30c12 6 18 18 17 32-12-8-18-20-17-32Z" opacity=".9"/>
-    </g>
-
-    <!-- full bouquet cluster -->
-    <g id="bouquet">
-      <use href="#sprig" x="-34" y="14" transform="rotate(-18 -34 14)"/>
-      <use href="#sprig" x="40" y="10" transform="rotate(22 40 10)"/>
-      <use href="#gyp" x="-46" y="-12"/><use href="#gyp" x="48" y="-16"/>
-      <use href="#gyp" x="0" y="-46"/><use href="#gyp" x="-20" y="34"/><use href="#gyp" x="24" y="36"/>
-      <use href="#lily" x="-26" y="-24"/>
-      <use href="#rose" x="26" y="-14"/>
-      <use href="#lily" x="18" y="26"/>
-      <use href="#rose" x="-22" y="20"/>
-    </g>
-  </defs>
-</svg>
-
-<!-- ============ background garden ============ -->
-<div id="garden" aria-hidden="true">
-  <svg viewBox="0 0 400 900" preserveAspectRatio="xMidYMid slice">
-    <use href="#bouquet" x="10" y="60" transform="scale(1.05)"/>
-    <use href="#bouquet" x="372" y="300" transform="scale(1.15) rotate(14 372 300)"/>
-    <use href="#bouquet" x="30" y="640" transform="scale(.95) rotate(-12 30 640)"/>
-    <use href="#gyp" x="330" y="120" transform="scale(1.3)"/>
-    <use href="#gyp" x="70" y="420" transform="scale(1.1)"/>
-    <use href="#rose" x="360" y="820" transform="scale(.9)"/>
-  </svg>
-</div>
-
-<div class="lang" role="group" aria-label="Language">
-  <button type="button" id="btn-ar" aria-pressed="true">عربي</button>
-  <button type="button" id="btn-en" aria-pressed="false">EN</button>
-</div>
-
-<!-- ============ COVER ============ -->
-<div id="cover">
-  <div class="env">
-    <svg class="art" viewBox="0 0 520 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <rect width="520" height="900" fill="#FDF4F5"/>
-      <path d="M0 0l260 396L520 0M0 900l260-396L520 900" stroke="#F0D3D9" stroke-width="1.2" fill="none"/>
-      <g opacity=".95">
-        <use href="#bouquet" x="260" y="120" transform="scale(1.25) translate(-52,-24)"/>
-        <use href="#bouquet" x="260" y="780" transform="scale(1.1) translate(-24,-70)"/>
-        <use href="#gyp" x="70" y="470" transform="scale(1.4)"/>
-        <use href="#gyp" x="450" y="470" transform="scale(1.4)"/>
-        <use href="#sprig" x="60" y="300" transform="rotate(-24 60 300)"/>
-        <use href="#sprig" x="460" y="300" transform="rotate(24 460 300)"/>
-      </g>
-    </svg>
-    <div class="flap"></div>
-    <button class="seal" id="seal" aria-label="افتح الدعوة"><span>A&amp;M</span></button>
-    <p class="tap" data-ar="اضغط على الخاتم لفتح الدعوة" data-en="Press the seal to open">اضغط على الخاتم لفتح الدعوة</p>
-  </div>
-</div>
-
-<!-- ============ HERO ============ -->
-<section id="hero">
-  <svg class="hero-art" viewBox="0 0 400 780" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#FFFDFC"/><stop offset=".5" stop-color="#FBEBEE"/><stop offset="1" stop-color="#F4D9DF"/>
-      </linearGradient>
-      <linearGradient id="inner" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#FFF8F5"/><stop offset=".55" stop-color="#F8E2E2"/><stop offset="1" stop-color="#EFCBD0"/>
-      </linearGradient>
-      <linearGradient id="roseg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#B9707F"/><stop offset=".5" stop-color="#EFC0CB"/><stop offset="1" stop-color="#B9707F"/>
-      </linearGradient>
-      <clipPath id="archClip"><path d="M80 700V300c0-66 54-120 120-120s120 54 120 120v400H80Z"/></clipPath>
-    </defs>
-    <rect width="400" height="780" fill="url(#sky)"/>
-    <g clip-path="url(#archClip)">
-      <rect x="80" y="150" width="240" height="550" fill="url(#inner)"/>
-      <circle cx="200" cy="330" r="48" fill="#FFF7F2" opacity=".8"/>
-      <g fill="#D9A9B2" opacity=".8">
-        <path d="M200 300c9 0 16 8 16 18 0 12-16 22-16 22s-16-10-16-22c0-10 7-18 16-18Z"/>
-        <path d="M198 262h4v34h-4zM192 272h16v4h-16z"/>
-        <path d="M150 470c0-30 22-56 50-56s50 26 50 56v20H150v-20Z"/>
-        <path d="M124 490h152v14H124zM136 440h12v50h-12zM252 440h12v50h-12z"/>
-        <path d="M142 420l6-14 6 14zM252 420l6-14 6 14z"/>
-      </g>
-      <rect x="80" y="486" width="240" height="220" fill="#E9C3C8" opacity=".45"/>
-      <path d="M150 706l24-220h52l24 220z" fill="#FFF6F3" opacity=".75"/>
-      <g fill="#C58A96" opacity=".95">
-        <path d="M190 560c-4 0-7 3-7 7 0 4 2 6 4 8-6 4-9 12-9 22v49h13l3-49 4 49h9v-52c0-15-6-25-13-27 2-2 3-4 3-7 0-4-3-7-7-7Z"/>
-        <path d="M215 558c-5 0-8 4-8 8 0 3 1 5 3 7-8 4-13 14-13 28v45c0 0 8 4 18 4s19-5 19-5c0-26-3-46-11-53 2-2 3-4 3-6 0-4-4-8-8-8Zm-3 42c9 2 16 20 16 44-6 2-16 2-22 0-2-18-1-38 6-44Z"/>
-      </g>
-    </g>
-    <path d="M80 700V300c0-66 54-120 120-120s120 54 120 120v400" fill="none" stroke="url(#roseg)" stroke-width="2.4"/>
-    <path d="M92 700V302c0-60 48-108 108-108s108 48 108 108v398" fill="none" stroke="#E7B6C0" stroke-width="1" opacity=".8"/>
-    <!-- rose garlands over the arch -->
-    <g>
-      <use href="#bouquet" x="86" y="176" transform="scale(.92) translate(6,10)"/>
-      <use href="#bouquet" x="318" y="180" transform="scale(.88) translate(38,20)"/>
-      <use href="#gyp" x="150" y="150" transform="scale(1.2)"/>
-      <use href="#gyp" x="252" y="152" transform="scale(1.2)"/>
-      <use href="#rose" x="200" y="134" transform="scale(.8)"/>
-      <use href="#sprig" x="120" y="176" transform="rotate(-30 120 176)"/>
-      <use href="#sprig" x="282" y="178" transform="rotate(30 282 178)"/>
-    </g>
-    <g>
-      <use href="#bouquet" x="34" y="700" transform="scale(1) translate(0,0)"/>
-      <use href="#bouquet" x="366" y="706" transform="scale(.95) translate(18,4)"/>
-    </g>
-  </svg>
-
-  <div class="hero-txt">
-    <p class="welcome" data-ar="بنعمة الله ندعوكم إلى" data-en="By the grace of God, welcome to">بنعمة الله ندعوكم إلى</p>
-    <p class="occasion rose-txt" data-ar="حفل خطوبة" data-en="the Engagement of">حفل خطوبة</p>
-    <div class="hero-names">
-      <h1 class="rose-txt" data-ar="البرت" data-en="Albert">البرت</h1>
-      <span style="color:var(--rose)" aria-hidden="true">
-        <svg width="30" height="26" viewBox="0 0 30 26" fill="currentColor"><path d="M15 22C10 17 4 14 4 9.5 4 6 6.7 4 9.4 4c2 0 4 1.1 5.6 3.3C16.6 5.1 18.6 4 20.6 4 23.3 4 26 6 26 9.5 26 14 20 17 15 22Z"/></svg>
-      </span>
-      <h1 class="rose-txt" data-ar="مرنا" data-en="Marna">مرنا</h1>
-    </div>
-  </div>
-
-  <div class="scroll-cue">
-    <span data-ar="انزل لتحت" data-en="Scroll down">انزل لتحت</span>
-    <svg width="22" height="14" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 2l9 9 9-9"/></svg>
-  </div>
-</section>
-
-<!-- ============ DATE ============ -->
-<section id="date-sec">
-  <div class="reveal">
-    <h2 class="title rose-txt" data-ar="الموعد" data-en="The Date">الموعد</h2>
-    <div class="rule" aria-hidden="true"><svg width="16" height="14" viewBox="0 0 30 26" fill="currentColor"><path d="M15 22C10 17 4 14 4 9.5 4 6 6.7 4 9.4 4c2 0 4 1.1 5.6 3.3C16.6 5.1 18.6 4 20.6 4 23.3 4 26 6 26 9.5 26 14 20 17 15 22Z"/></svg></div>
-    <p class="hint" id="scratch-hint" data-ar="✦ اكشط لتظهر التاريخ ✦" data-en="✦ Scratch to reveal the date ✦">✦ اكشط لتظهر التاريخ ✦</p>
-    <div class="tiles">
-      <div class="tile"><div class="val" data-ar="٢٤" data-en="24">٢٤</div><canvas></canvas></div>
-      <div class="tile"><div class="val" data-ar="سبتمبر" data-en="September">سبتمبر</div><canvas></canvas></div>
-      <div class="tile"><div class="val" data-ar="٢٠٢٦" data-en="2026">٢٠٢٦</div><canvas></canvas></div>
-    </div>
-    <div class="tkeys">
-      <span data-ar="اليوم" data-en="DAY">اليوم</span>
-      <span data-ar="الشهر" data-en="MONTH">الشهر</span>
-      <span data-ar="السنة" data-en="YEAR">السنة</span>
-    </div>
-    <button type="button" class="reveal-all" id="reveal-all" data-ar="اظهر التاريخ فورًا" data-en="Reveal it for me">اظهر التاريخ فورًا</button>
-  </div>
-</section>
-
-<!-- ============ INVITATION ============ -->
-<section id="invite-sec">
-  <div class="reveal">
-    <div class="arch">
-      <svg class="cross" width="30" height="42" viewBox="0 0 30 42" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-        <path d="M15 4v34M5 14h20"/><circle cx="15" cy="14" r="9" opacity=".45"/>
-      </svg>
-      <p class="verse" data-ar="«هذا هو حبيبي وهذا هو خليلي»" data-en="&ldquo;This is my beloved, and this is my friend.&rdquo;">«هذا هو حبيبي وهذا هو خليلي»</p>
-      <p class="verse-ref" data-ar="نشيد الأنشاد ٥ : ١٦" data-en="Song of Songs 5:16">نشيد الأنشاد ٥ : ١٦</p>
-      <p class="inv" data-ar="نتشرف بدعوتكم لمشاركتنا فرحتنا<br>بمناسبة خطوبة" data-en="You are invited to celebrate<br>the engagement of">نتشرف بدعوتكم لمشاركتنا فرحتنا<br>بمناسبة خطوبة</p>
-      <div class="who">
-        <h3 class="rose-txt" data-ar="البرت" data-en="Albert">البرت</h3>
-        <span style="color:var(--rose)" aria-hidden="true"><svg width="24" height="21" viewBox="0 0 30 26" fill="currentColor"><path d="M15 22C10 17 4 14 4 9.5 4 6 6.7 4 9.4 4c2 0 4 1.1 5.6 3.3C16.6 5.1 18.6 4 20.6 4 23.3 4 26 6 26 9.5 26 14 20 17 15 22Z"/></svg></span>
-        <h3 class="rose-txt" data-ar="مرنا" data-en="Marna">مرنا</h3>
-      </div>
-      <div class="fathers">
-        <div>
-          <p class="k" data-ar="نجل" data-en="Son of">نجل</p>
-          <p class="v" data-ar="السيد اميل البرت بشارة" data-en="Mr. Emil Albert Bishara">السيد اميل البرت بشارة</p>
-        </div>
-        <div>
-          <p class="k" data-ar="ابنة" data-en="Daughter of">ابنة</p>
-          <p class="v" data-ar="السيد رامز عطالله شحاته" data-en="Mr. Ramz Atallah Shehata">السيد رامز عطالله شحاته</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TIMELINE ============ -->
-<section id="tl-sec">
-  <div class="reveal">
-    <h2 class="title rose-txt" data-ar="برنامج اليوم" data-en="The Timeline">برنامج اليوم</h2>
-    <div class="rule" aria-hidden="true"><svg width="16" height="14" viewBox="0 0 30 26" fill="currentColor"><path d="M15 22C10 17 4 14 4 9.5 4 6 6.7 4 9.4 4c2 0 4 1.1 5.6 3.3C16.6 5.1 18.6 4 20.6 4 23.3 4 26 6 26 9.5 26 14 20 17 15 22Z"/></svg></div>
-    <div class="tl">
-      <div class="stop"><div class="box">
-        <p class="t" data-ar="٦:٣٠ م" data-en="6:30 pm">٦:٣٠ م</p>
-        <p class="d" data-ar="استقبال المدعوين" data-en="Guest arrival">استقبال المدعوين</p>
-      </div></div>
-      <div class="stop"><div class="box">
-        <p class="t" data-ar="٧:٠٠ م" data-en="7:00 pm">٧:٠٠ م</p>
-        <p class="d" data-ar="صلاة الخطوبة بالكنيسة" data-en="Engagement blessing at the church">صلاة الخطوبة بالكنيسة</p>
-      </div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ VENUE ============ -->
-<section id="venue-sec">
-  <div class="reveal venue">
-    <h2 class="title rose-txt" data-ar="المكان" data-en="The Venue">المكان</h2>
-    <div class="rule" aria-hidden="true"><svg width="16" height="14" viewBox="0 0 30 26" fill="currentColor"><path d="M15 22C10 17 4 14 4 9.5 4 6 6.7 4 9.4 4c2 0 4 1.1 5.6 3.3C16.6 5.1 18.6 4 20.6 4 23.3 4 26 6 26 9.5 26 14 20 17 15 22Z"/></svg></div>
-    <p class="city" data-ar="أسيوط" data-en="ASSIUT">أسيوط</p>
-    <p class="name" data-ar="كنيسة الشهيد العظيم مارجرجس" data-en="Church of St. George the Great Martyr">كنيسة الشهيد العظيم مارجرجس</p>
-    <p class="addr" data-ar="شارع يسري راغب، الحمراء الثانية" data-en="Yosri Ragheb St., Al Hamra Al Thaniya">شارع يسري راغب، الحمراء الثانية</p>
-    <div class="mapwrap" id="mapwrap">
-      <iframe id="mapframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Map"></iframe>
-      <div class="mapfallback" data-ar="الخريطة مش ظاهرة هنا؟ اضغط «افتح الاتجاهات»" data-en="Map not loading here? Tap “Open in Maps”">الخريطة مش ظاهرة هنا؟ اضغط «افتح الاتجاهات»</div>
-      <div class="bar">
-        <span data-ar="الموقع على الخريطة" data-en="Location on the map">الموقع على الخريطة</span>
-        <a id="maps-link" href="#" target="_blank" rel="noopener" data-ar="افتح الاتجاهات ↗" data-en="Open in Maps ↗">افتح الاتجاهات ↗</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ COUNTDOWN + RSVP ============ -->
-<section id="rsvp-sec">
-  <div class="reveal">
-    <h2 class="title rose-txt" data-ar="باقي على فرحنا" data-en="Counting Down">باقي على فرحنا</h2>
-    <div class="rule" aria-hidden="true"><svg width="16" height="14" viewBox="0 0 30 26" fill="currentColor"><path d="M15 22C10 17 4 14 4 9.5 4 6 6.7 4 9.4 4c2 0 4 1.1 5.6 3.3C16.6 5.1 18.6 4 20.6 4 23.3 4 26 6 26 9.5 26 14 20 17 15 22Z"/></svg></div>
-    <div class="count" id="count"></div>
-    <p class="done-msg" id="after" hidden data-ar="فرحنا اكتمل بوجودكم 🤍" data-en="Our joy is complete 🤍"></p>
-    <div class="acts">
-      <button type="button" class="btn solid" id="rsvp" data-ar="أكّد حضورك" data-en="Confirm attendance">أكّد حضورك</button>
-      <button type="button" class="btn" id="ics" data-ar="أضف للتقويم" data-en="Add to calendar">أضف للتقويم</button>
-      <button type="button" class="btn" id="share" data-ar="شارك الدعوة" data-en="Share">شارك الدعوة</button>
-    </div>
-  </div>
-</section>
-
-<footer class="reveal">
-  <span class="m">A &amp; M</span>
-  <p class="closing" data-ar="وجودكم معنا يُكمل فرحتنا" data-en="Your presence will make our joy complete">وجودكم معنا يُكمل فرحتنا</p>
-</footer>
-
-<dialog id="dlg">
-  <h3 data-ar="تأكيد الحضور" data-en="Confirm attendance">تأكيد الحضور</h3>
-  <p class="sub" data-ar="ردّك يوصلنا على واتساب فورًا" data-en="Your reply reaches us on WhatsApp">ردّك يوصلنا على واتساب فورًا</p>
-  <label for="guest" data-ar="الاسم" data-en="Your name">الاسم</label>
-  <input type="text" id="guest" autocomplete="name">
-  <label data-ar="هتشرفنا؟" data-en="Will you join us?">هتشرفنا؟</label>
-  <div class="choice" id="yesno">
-    <button type="button" data-v="yes" aria-pressed="true" data-ar="أكيد هحضر" data-en="Yes, I'll be there">أكيد هحضر</button>
-    <button type="button" data-v="no" aria-pressed="false" data-ar="أعتذر" data-en="Sorry, can't make it">أعتذر</button>
-  </div>
-  <div id="seats-wrap">
-    <label for="seats" data-ar="عدد الأفراد" data-en="Number of guests">عدد الأفراد</label>
-    <input type="number" id="seats" min="1" max="12" value="1" inputmode="numeric">
-  </div>
-  <div class="dlg-acts">
-    <button type="button" class="btn solid" id="send" data-ar="إرسال" data-en="Send">إرسال</button>
-    <button type="button" class="btn" id="close" data-ar="إلغاء" data-en="Cancel">إلغاء</button>
-  </div>
-</dialog>
-
-<script>
-/* =========================================================
-   عدّل البيانات من هنا
-   ========================================================= */
-var CONFIG = {
-  start: new Date(2026, 8, 24, 19, 0),   // ٢٤ سبتمبر ٢٠٢٦ — ٧:٠٠ م
-  hours: 3,
-  lat: 27.1858008, lng: 31.1809537,
-  placeId: "ChIJR649jfoLRRQRkbpYmbIaWb0",
-  whatsapp: "201000000000"               // رقمك بصيغة دولية بدون +
-};
-
-var T = {
-  days:{ar:"يوم",en:"days"}, hrs:{ar:"ساعة",en:"hours"}, mins:{ar:"دقيقة",en:"min"}, secs:{ar:"ثانية",en:"sec"},
-  scratch:{ar:"اكشط",en:"scratch"},
-  full:{ar:"٢٤ سبتمبر ٢٠٢٦ — الخميس",en:"Thursday, 24 September 2026"},
-  yes:{ar:"سأحضر",en:"Attending"}, no:{ar:"أعتذر عن الحضور",en:"Not attending"},
-  msg:{ar:"تأكيد حضور خطوبة البرت و مرنا",en:"RSVP — Albert & Marna engagement"},
-  share:{ar:"دعوة خطوبة البرت و مرنا — ٢٤ سبتمبر ٢٠٢٦",en:"Albert & Marna — 24 September 2026"},
-  venue:{ar:"كنيسة الشهيد العظيم مارجرجس - شارع يسري راغب، أسيوط",en:"Church of St. George the Great Martyr - Assiut"},
-  cal:{ar:"خطوبة البرت و مرنا",en:"Albert & Marna - Engagement"},
-  note:{ar:"وجودكم معنا يكمل فرحتنا",en:"Your presence will make our joy complete"}
-};
-
-var lang = "ar";
-function $(s){ return document.querySelector(s); }
-function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
-
-/* ---------- language (bullet-proof) ---------- */
-function setLang(l){
-  lang = (l === "en") ? "en" : "ar";
-  document.body.setAttribute("data-lang", lang);
-  document.documentElement.setAttribute("lang", lang);
-  document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-  $$("[data-ar]").forEach(function(el){
-    var v = el.getAttribute("data-" + lang);
-    if (v !== null) el.innerHTML = v;
-  });
-  var a = $("#btn-ar"), e = $("#btn-en");
-  if (a) a.setAttribute("aria-pressed", lang === "ar");
-  if (e) e.setAttribute("aria-pressed", lang === "en");
-  try { redrawScratch(); } catch(err){}
-  try { tick(); } catch(err){}
-}
-document.addEventListener("click", function(ev){
-  var t = ev.target.closest ? ev.target.closest("#btn-ar,#btn-en") : null;
-  if (!t) return;
-  setLang(t.id === "btn-en" ? "en" : "ar");
-});
-
-/* ---------- cover ---------- */
-function openCover(){
-  var c = $("#cover");
-  if (!c || c.classList.contains("open")) return;
-  c.classList.add("open");
-  document.body.classList.remove("locked");
-  setTimeout(function(){ if (c.parentNode) c.parentNode.removeChild(c); }, 1500);
-}
-$("#seal").addEventListener("click", openCover);
-
-/* ---------- scroll reveals ---------- */
-(function(){
-  if (!("IntersectionObserver" in window)){ $$(".reveal").forEach(function(e){ e.classList.add("in"); }); return; }
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
-  }, {threshold:.15});
-  $$(".reveal").forEach(function(e){ io.observe(e); });
-})();
-
-/* ---------- scratch tiles ---------- */
-var scratchers = [];
-function initScratch(tile){
-  var cv = tile.querySelector("canvas");
-  var ctx = null;
-  try { ctx = cv.getContext("2d"); } catch(e){}
-  if (!ctx){ tile.classList.add("done"); return; }
-  var state = {tile:tile, cv:cv, ctx:ctx, cleared:false, paint:paint};
-  function paint(){
-    var r = tile.getBoundingClientRect();
-    var w = Math.max(r.width, 70), h = Math.max(r.height, 90);
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    var g = ctx.createLinearGradient(0,0,w,h);
-    g.addColorStop(0,"#F7DCE1"); g.addColorStop(.45,"#FDF1F3"); g.addColorStop(.62,"#EFC3CE"); g.addColorStop(1,"#E3ABB8");
-    ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-    ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 1;
-    for (var i=-h; i<w; i+=9){ ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i+h,h); ctx.stroke(); }
-    ctx.fillStyle = "rgba(150,86,106,.8)";
-    ctx.font = "13px " + (lang === "ar" ? "'Noto Naskh Arabic', serif" : "'EB Garamond', serif");
-    ctx.textAlign = "center";
-    ctx.fillText(T.scratch[lang], w/2, h/2 + 4);
-  }
-  function amountCleared(){
-    try{
-      var d = ctx.getImageData(0,0,cv.width,cv.height).data, clear = 0, n = 0;
-      for (var i=3; i<d.length; i+=4*24){ n++; if (d[i] < 40) clear++; }
-      return n ? clear/n : 0;
-    }catch(e){ return 0; }
-  }
-  var drawing = false;
-  function erase(e){
-    var b = cv.getBoundingClientRect();
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.beginPath(); ctx.arc(e.clientX-b.left, e.clientY-b.top, 18, 0, Math.PI*2); ctx.fill();
-    if (!state.cleared && amountCleared() > .4){ state.cleared = true; tile.classList.add("done"); checkAll(); }
-  }
-  cv.addEventListener("pointerdown", function(e){ drawing = true; try{cv.setPointerCapture(e.pointerId);}catch(x){} erase(e); });
-  cv.addEventListener("pointermove", function(e){ if (drawing) erase(e); });
-  cv.addEventListener("pointerup", function(){ drawing = false; });
-  cv.addEventListener("pointercancel", function(){ drawing = false; });
-  paint();
-  scratchers.push(state);
-}
-function redrawScratch(){
-  scratchers.forEach(function(s){ if (!s.cleared) s.paint(); });
-}
-function checkAll(){
-  var all = scratchers.length && scratchers.every(function(s){ return s.cleared; });
-  if (all){
-    var h = $("#scratch-hint");
-    h.setAttribute("data-ar", T.full.ar);
-    h.setAttribute("data-en", T.full.en);
-    h.innerHTML = T.full[lang];
-    $("#reveal-all").hidden = true;
-  }
-}
-$$(".tile").forEach(initScratch);
-$("#reveal-all").addEventListener("click", function(){
-  scratchers.forEach(function(s){ s.cleared = true; s.tile.classList.add("done"); });
-  checkAll();
-});
-
-/* ---------- map (google embed + osm fallback) ---------- */
-(function(){
-  var f = $("#mapframe"), wrap = $("#mapwrap");
-  var g = "https://maps.google.com/maps?q=" + CONFIG.lat + "," + CONFIG.lng + "&z=16&hl=ar&output=embed";
-  var d = 0.006;
-  var osm = "https://www.openstreetmap.org/export/embed.html?bbox=" +
-            [CONFIG.lng-d, CONFIG.lat-d*0.6, CONFIG.lng+d, CONFIG.lat+d*0.6].join(",") +
-            "&layer=mapnik&marker=" + CONFIG.lat + "," + CONFIG.lng;
-  var loaded = false, tried = 0;
-  f.addEventListener("load", function(){ loaded = true; });
-  f.src = g;
-  setTimeout(function(){ if (!loaded && tried === 0){ tried = 1; f.src = osm; } }, 3500);
-  setTimeout(function(){ if (!loaded){ wrap.classList.add("failed"); } }, 7000);
-  $("#maps-link").href = "https://www.google.com/maps/search/?api=1&query=" +
-    CONFIG.lat + "," + CONFIG.lng + "&query_place_id=" + CONFIG.placeId;
-})();
-
-/* ---------- countdown ---------- */
-function tick(){
-  var diff = CONFIG.start - new Date();
-  var box = $("#count"), after = $("#after");
-  if (!box) return;
-  if (diff <= 0){ box.hidden = true; after.hidden = false; return; }
-  box.hidden = false; after.hidden = true;
-  var s = Math.floor(diff/1000);
-  var cells = [
-    [Math.floor(s/86400), T.days[lang]],
-    [Math.floor(s%86400/3600), T.hrs[lang]],
-    [Math.floor(s%3600/60), T.mins[lang]],
-    [s%60, T.secs[lang]]
-  ];
-  box.innerHTML = cells.map(function(c){
-    return '<div class="cbox"><b>' + String(c[0]).padStart(2,"0") + '</b><small>' + c[1] + '</small></div>';
-  }).join("");
-}
-setInterval(tick, 1000);
-
-/* ---------- calendar ---------- */
-function pad(n){ return String(n).padStart(2,"0"); }
-function stamp(d){
-  return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+"T"+pad(d.getUTCHours())+pad(d.getUTCMinutes())+"00Z";
-}
-$("#ics").addEventListener("click", function(){
-  var end = new Date(CONFIG.start.getTime() + CONFIG.hours*3600*1000);
-  var ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//albert-marna//invite//EN","BEGIN:VEVENT",
-    "UID:"+Date.now()+"@albert-marna","DTSTAMP:"+stamp(new Date()),
-    "DTSTART:"+stamp(CONFIG.start),"DTEND:"+stamp(end),
-    "SUMMARY:"+T.cal[lang],"LOCATION:"+T.venue[lang],
-    "GEO:"+CONFIG.lat+";"+CONFIG.lng,"DESCRIPTION:"+T.note[lang],
-    "BEGIN:VALARM","TRIGGER:-P1D","ACTION:DISPLAY","DESCRIPTION:Reminder","END:VALARM",
-    "END:VEVENT","END:VCALENDAR"].join("\r\n");
-  var url = URL.createObjectURL(new Blob([ics], {type:"text/calendar;charset=utf-8"}));
-  var a = document.createElement("a");
-  a.href = url; a.download = "albert-marna-engagement.ics"; a.click();
-  setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
-});
-
-/* ---------- share ---------- */
-$("#share").addEventListener("click", function(){
-  var data = {title:"Albert & Marna", text:T.share[lang], url:location.href};
-  if (navigator.share){ navigator.share(data).catch(function(){}); return; }
-  if (navigator.clipboard){
-    navigator.clipboard.writeText(data.text + " — " + location.href).then(function(){
-      $("#share").textContent = (lang === "ar") ? "تم النسخ" : "Link copied";
-    }).catch(function(){});
-  }
-});
-
-/* ---------- rsvp ---------- */
-var coming = true;
-var dlg = $("#dlg");
-$("#rsvp").addEventListener("click", function(){
-  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open","");
-  $("#guest").focus();
-});
-$("#close").addEventListener("click", function(){ dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
-$("#yesno").addEventListener("click", function(ev){
-  var b = ev.target.closest("button[data-v]");
-  if (!b) return;
-  coming = b.getAttribute("data-v") === "yes";
-  $$("#yesno button").forEach(function(x){ x.setAttribute("aria-pressed", x === b); });
-  $("#seats-wrap").hidden = !coming;
-});
-$("#send").addEventListener("click", function(){
-  var name = $("#guest").value.trim();
-  if (!name){ $("#guest").focus(); $("#guest").style.borderColor = "#C4677E"; return; }
-  var seats = coming ? " — " + (lang === "ar" ? "عدد الأفراد" : "Guests") + ": " + $("#seats").value : "";
-  var body = T.msg[lang] + "\n" + name + "\n" + (coming ? T.yes[lang] : T.no[lang]) + seats;
-  window.open("https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(body), "_blank");
-  dlg.close ? dlg.close() : dlg.removeAttribute("open");
-});
-
-/* ---------- go ---------- */
-setLang("ar");
-tick();
-window.addEventListener("resize", redrawScratch);
-</script>
+<body>
+<p dir="rtl" class="p1"><span class="s1"></span><br></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p3"><span class="s1">عربي</span></p>
+<p dir="rtl" class="p4"><span class="s2">EN</span></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p5"><span class="s1">A &amp; M</span></p>
+<p dir="rtl" class="p6"><span class="s1">دعوة</span><span class="s3"> </span><span class="s1">خطوبة</span></p>
+<p dir="rtl" class="p7"><span class="s1">البرت</span><span class="s4"> &amp; </span><span class="s1">مرنا</span></p>
+<p dir="rtl" class="p8"><span class="s1">٢٤</span><span class="s3"> </span><span class="s1">سبتمبر</span><span class="s3"> </span><span class="s1">٢٠٢٦</span></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p9"><span class="s1">A&amp;M</span></p>
+<p dir="rtl" class="p10"><span class="s1">اضغط</span><span class="s5"> </span><span class="s1">على</span><span class="s5"> </span><span class="s1">الخاتم</span><span class="s5"> </span><span class="s1">لفتح</span><span class="s5"> </span><span class="s1">الدعوة</span></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p11"><span class="s1"></span><br></p>
+<p dir="rtl" class="p11"><span class="s1"></span><br></p>
+<p dir="rtl" class="p12"><span class="s1">بنعمة</span><span class="s5"> </span><span class="s1">الله</span><span class="s5"> </span><span class="s1">ندعوكم</span><span class="s5"> </span><span class="s1">إلى</span></p>
+<p dir="rtl" class="p13"><span class="s1">حفل</span><span class="s6"> </span><span class="s1">خطوبة</span></p>
+<h1 dir="rtl" style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 38.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239"><span class="s1">البرت</span></h1>
+<p dir="rtl" class="p15"><span class="s1"></span><br></p>
+<h1 dir="rtl" style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 38.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239"><span class="s1">مرنا</span></h1>
+<p dir="rtl" class="p16"><span class="s1">انزل</span><span class="s5"> </span><span class="s1">لتحت</span></p>
+<p dir="rtl" class="p17"><span class="s1"></span><br></p>
+<h2 dir="rtl" style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 38.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239"><span class="s1">الموعد</span></h2>
+<p dir="rtl" class="p18"><span class="s1"></span><br></p>
+<p dir="rtl" class="p19"><span class="s7">✦</span><span class="s5"> </span><span class="s1">اكشط</span><span class="s5"> </span><span class="s1">لتظهر</span><span class="s5"> </span><span class="s1">التاريخ</span><span class="s5"> </span><span class="s7">✦</span></p>
+<p dir="rtl" class="p20"><span class="s1">٢٤</span></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p20"><span class="s1">سبتمبر</span></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p20"><span class="s1">٢٠٢٦</span></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p2"><span class="s1"></span><br></p>
+<p dir="rtl" class="p21"><span class="s1">اليوم</span></p>
+<p dir="rtl" class="p21"><span class="s1">الشهر</span></p>
+<p dir="rtl" class="p21"><span class="s1">السنة</span></p>
+<p dir="rtl" class="p22"><span class="s1">اظهر</span><span class="s8"> </span><span class="s1">التاريخ</span><span class="s8"> </span><span class="s1">فورًا</span></p>
+<p dir="rtl" class="p15"><span class="s1"></span><br></p>
+<p dir="rtl" class="p23"><span class="s9">«</span><span class="s1">هذا</span><span class="s9"> </span><span class="s1">هو</span><span class="s9"> </span><span class="s1">حبيبي</span><span class="s9"> </span><span class="s1">وهذا</span><span class="s9"> </span><span class="s1">هو</span><span class="s9"> </span><span class="s1">خليلي</span><span class="s9">»</span></p>
+<p dir="rtl" class="p24"><span class="s1">نشيد</span><span class="s3"> </span><span class="s1">الأنشاد</span><span class="s3"> </span><span class="s1">٥</span><span class="s3"> : </span><span class="s1">١٦</span></p>
+<p dir="rtl" class="p25"><span class="s1">نتشرف</span><span class="s10"> </span><span class="s1">بدعوتكم</span><span class="s10"> </span><span class="s1">لمشاركتنا</span><span class="s10"> </span><span class="s1">فرحتنا</span><span class="s10"><br>
+</span><span class="s1">بمناسبة</span><span class="s10"> </span><span class="s1">خطوبة</span></p>
+<h3 dir="rtl" style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 32.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239"><span class="s1">البرت</span></h3>
+<p dir="rtl" class="p15"><span class="s1"></span><br></p>
+<h3 dir="rtl" style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 32.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239"><span class="s1">مرنا</span></h3>
+<p dir="rtl" class="p27"><span class="s1">نجل</span></p>
+<p dir="rtl" class="p28"><span class="s1">السيد</span><span class="s5"> </span><span class="s1">اميل</span><span class="s5"> </span><span class="s1">البرت</span><span class="s5"> </span><span class="s1">أمين</span></p>
+<p dir="rtl" class="p27"><span class="s1">ابنة</span></p>
+<p dir="rtl" class="p28"><span class="s1">السيد</span><span class="s5"> </span><span class="s1">رامز</span><span class="s5"> </span><span class="s1">عطالله</span><span class="s5"> </span><span class="s1">جرجس</span></p>
+<h2 dir="rtl" style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 38.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239"><span class="s1">برنامج</span><span class="s11"> </span><span class="s1">اليوم</span></h2>
+<p dir="rtl" class="p18"><span class="s1"></span><br></p>
+<p dir="rtl" class="p29"><span class="s1">٦</span><span class="s4">:</span><span class="s1">٣٠</span><span class="s4"> </span><span class="s1">م</span></p>
+<p dir="rtl" class="p30"><span class="s1">استقبال</span><span class="s5"> </span><span class="s1">المدعوين</span></p>
+<p dir="rtl" class="p29"><span class="s1">٧</span><span class="s4">:</span><span class="s1">٠٠</span><span class="s4"> </span><span class="s1">م</span></p>
+<p dir="rtl" class="p30"><span class="s1">صلاة</span><span class="s5"> </span><span class="s1">الخطوبة</span><span class="s5"> </span><span class="s1">بالكنيسة</span></p>
+<h2 dir="rtl" style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 38.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239"><span class="s1">المكان</span></h2>
+<p dir="rtl" class="p15"><span class="s1"></span><br></p>
+<p dir="rtl" class="p31"><span class="s1">أسيوط</span></p>
+<p dir="rtl" class="p32"><span class="s1">كنيسة</span><span class="s12"> </span><span class="s1">الشهيد</span><span class="s12"> </span><span class="s1">العظيم</span><span class="s12"> </span><span class="s1">مارجرجس</span></p>
+<p dir="rtl" class="p22"><span class="s1">شارع</span><span class="s8"> </span><span class="s1">يسري</span><span class="s8"> </span><span class="s1">راغب،</span><span class="s8"> </span><span class="s1">الحمراء</span><span class="s8"> </span><span class="s1">الثانية</span></p>
+<p dir="rtl" class="p33"><span class="s13">الموقع</span><span class="s14"> </span><span class="s13">على</span><span class="s14"> </span><span class="s13">الخريطة</span></p>
+<p dir="rtl" class="p34"><span class="s13">افتح</span><span class="s14"> </span><span class="s13">الاتجاهات</span><span class="s14"> ↗</span></p>
+<h2 dir="rtl" style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 38.0px 'Geeza Pro'; color: #483239; -webkit-text-stroke: #483239"><span class="s1">باقي</span><span class="s11"> </span><span class="s1">على</span><span class="s11"> </span><span class="s1">فرحنا</span></h2>
+<p dir="rtl" class="p18"><span class="s1"></span><br></p>
+<p dir="rtl" class="p35"><span class="s15">أكّد</span><span class="s16"> </span><span class="s15">حضورك</span><span class="s17"> </span><span class="s18">أضف</span><span class="s19"> </span><span class="s18">للتقويم</span><span class="s17"> </span><span class="s18">شارك</span><span class="s19"> </span><span class="s18">الدعوة</span></p>
+<p dir="rtl" class="p36"><span class="s1">A &amp; M</span></p>
+<p dir="rtl" class="p37"><span class="s1">وجودكم</span><span class="s20"> </span><span class="s1">معنا</span><span class="s20"> </span><span class="s1">يُكمل</span><span class="s20"> </span><span class="s1">فرحتنا</span></p>
 </body>
 </html>
