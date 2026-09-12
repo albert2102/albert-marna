@@ -1087,11 +1087,27 @@ function showThanks(name){
 }
 
 /* ---------- لوحة الردود: افتح اللينك وزوّد ?admin في آخره ---------- */
-function toCSV(rows){
-  var head = "name,attending,guests,at\n";
-  return head + rows.map(function(r){
-    return '"' + String(r.name).replace(/"/g,'""') + '",' + (r.coming ? "yes" : "no") + "," + r.seats + "," + r.at;
-  }).join("\n");
+function toTXT(rows){
+  var going = rows.filter(function(r){ return r.coming; });
+  var heads = going.reduce(function(n,r){ return n + (r.seats || 1); }, 0);
+  var L = [];
+  L.push("ردود دعوة خطوبة البرت و ميرنا");
+  L.push("٢٤ سبتمبر ٢٠٢٦ — كنيسة مارجرجس، أسيوط");
+  L.push("=======================================");
+  L.push("إجمالي الردود: " + rows.length);
+  L.push("هيحضروا: " + going.length + " رد — عدد الأفراد: " + heads);
+  L.push("معتذرين: " + (rows.length - going.length));
+  L.push("=======================================");
+  L.push("");
+  rows.forEach(function(r, i){
+    var d = new Date(r.at);
+    var when = d.toLocaleDateString() + " " + d.toLocaleTimeString();
+    L.push((i+1) + ") " + r.name);
+    L.push("   " + (r.coming ? ("هيحضر — عدد الأفراد: " + r.seats) : "معتذر"));
+    L.push("   " + when);
+    L.push("");
+  });
+  return L.join("\r\n");
 }
 function openAdmin(){
   var all = loadRSVP();
@@ -1111,18 +1127,26 @@ function openAdmin(){
         }).join("") : '<p class="ad-empty">لسه مفيش ردود على الجهاز ده</p>') +
       '</div>' +
       '<div class="ad-acts">' +
-        '<button type="button" class="btn" id="ad-csv">تحميل CSV</button>' +
+        '<button type="button" class="btn" id="ad-txt">تحميل ملف نصي</button>' +
+        '<button type="button" class="btn" id="ad-copy">نسخ الكل</button>' +
         '<button type="button" class="btn" id="ad-clear">مسح الكل</button>' +
         '<button type="button" class="btn solid" id="ad-close">إغلاق</button>' +
       '</div>' +
     '</div>';
   document.body.appendChild(wrap);
   document.getElementById("ad-close").onclick = function(){ wrap.remove(); };
-  document.getElementById("ad-csv").onclick = function(){
-    var url = URL.createObjectURL(new Blob(["\ufeff" + toCSV(loadRSVP())], {type:"text/csv;charset=utf-8"}));
+  document.getElementById("ad-txt").onclick = function(){
+    var url = URL.createObjectURL(new Blob(["\ufeff" + toTXT(loadRSVP())], {type:"text/plain;charset=utf-8"}));
     var a = document.createElement("a");
-    a.href = url; a.download = "rsvp-albert-merna.csv"; a.click();
+    a.href = url; a.download = "rsvp-albert-merna.txt"; a.click();
     setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  };
+  document.getElementById("ad-copy").onclick = function(){
+    var btn = this, txt = toTXT(loadRSVP());
+    if (navigator.clipboard){
+      navigator.clipboard.writeText(txt).then(function(){ btn.textContent = "تم النسخ"; })
+        .catch(function(){ btn.textContent = "مش قادر ينسخ"; });
+    }
   };
   document.getElementById("ad-clear").onclick = function(){
     if (!confirm("متأكد إنك عايز تمسح كل الردود؟")) return;
