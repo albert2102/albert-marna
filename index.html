@@ -148,7 +148,7 @@ body[data-lang="en"] h2.title{font-family:var(--en-display);font-size:40px;line-
   box-shadow:0 18px 40px rgba(30,58,95,.22),inset 0 0 0 6px rgba(255,255,255,.6);
   background:#E9F1F9;
 }
-.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#EAF1F9}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#EAF1F9;z-index:1}
 .portrait .portrait-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .portrait:after{
   content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
@@ -849,8 +849,11 @@ function openCover(){
       try { hv.currentTime = 0; } catch(e){}
       var p2 = hv.play();
       if (p2 && p2.catch) p2.catch(function(){ hv.muted = true; hv.play().catch(function(){}); });
-      var sb2 = document.getElementById("sound-btn");
-      if (sb2) sb2.classList.toggle("muted", hv.muted);
+      setTimeout(function(){
+        if (hv.paused){ hv.muted = true; hv.play().catch(function(){}); }
+        var sb2 = document.getElementById("sound-btn");
+        if (sb2) sb2.classList.toggle("muted", hv.muted || hv.paused);
+      }, 700);
     }, 2350);
   }
 
@@ -1156,6 +1159,95 @@ function openAdmin(){
   };
 }
 if (/[?&]admin/.test(location.search)) setTimeout(openAdmin, 400);
+
+/* ---------- real photos (if provided in CONFIG.images) ---------- */
+(function(){
+  var im = CONFIG.images || {};
+
+  if (CONFIG.video){
+    var v = document.getElementById("hero-video");
+    if (v){
+      window.__heroVideo = v;
+      // بنوريه على طول: iOS مش بيعمل preload فـ loadeddata ممكن ميجيش أبدًا
+      v.hidden = false;
+      v.setAttribute("webkit-playsinline", "");
+      var sb = document.getElementById("sound-btn");
+      if (sb) sb.hidden = false;
+      var art0 = document.querySelector(".portrait-art");
+      if (art0) art0.style.display = "none";
+      try { v.load(); v.pause(); v.currentTime = 0; } catch(e){}
+      v.addEventListener("ended", function(){      // يقف على آخر فريم ومايكررش
+        try { v.pause(); v.currentTime = Math.max(0, v.duration - 0.05); } catch(e){}
+      });
+      v.addEventListener("error", function(){          // مفيش فيديو؟ الصورة الثابتة تفضل مكانها
+        v.hidden = true;
+        var sbx = document.getElementById("sound-btn");
+        if (sbx) sbx.hidden = true;
+        var him = document.getElementById("hero-img");
+        if (him && him.getAttribute("src")) him.hidden = false;
+      });
+
+      var sb = document.getElementById("sound-btn");
+      if (sb){
+        function syncBtn(){ sb.classList.toggle("muted", v.muted || v.paused); }
+        sb.addEventListener("click", function(){
+          if (v.paused || v.ended){
+            if (v.ended || v.currentTime >= (v.duration || 1) - 0.1) { try { v.currentTime = 0; } catch(e){} }
+            v.muted = false;
+            var pp = v.play();
+            if (pp && pp.catch) pp.catch(function(){ v.muted = true; v.play().catch(function(){}); });
+          } else if (v.muted){ v.muted = false; }
+          else { v.muted = true; }
+          setTimeout(syncBtn, 80);
+        });
+        v.addEventListener("play", syncBtn);
+        v.addEventListener("pause", syncBtn);
+        syncBtn();
+      }
+      var vs = (typeof CONFIG.video === "string") ? {mp4:CONFIG.video} : CONFIG.video;
+      if (vs.mp4){
+        var s1 = document.createElement("source");
+        s1.src = vs.mp4; s1.type = "video/mp4"; v.appendChild(s1);
+      }
+      if (vs.webm){
+        var s2 = document.createElement("source");
+        s2.src = vs.webm; s2.type = "video/webm"; v.appendChild(s2);
+      }
+      v.load();
+    }
+  }
+  if (im.hero){
+    var h = document.getElementById("hero-img");
+    if (h){
+      h.onload = function(){
+        var vid = document.getElementById("hero-video");
+        h.hidden = !!(vid && !vid.hidden);
+        var art = document.querySelector(".portrait-art");
+        if (art) art.style.display = "none";
+      };
+      h.onerror = function(){ h.hidden = true; };
+      h.src = im.hero;
+    }
+  }
+  if (im.church){
+    var ch = document.getElementById("church-img");
+    if (ch){
+      ch.onload = function(){ ch.hidden = false; };
+      ch.onerror = function(){ ch.hidden = true; };
+      ch.src = im.church;
+    }
+  }
+  if (im.cross){
+    var sv = document.querySelector(".cross");
+    if (sv){
+      var img = document.createElement("img");
+      img.className = "cross-img";
+      img.alt = "";
+      img.onload = function(){ sv.parentNode.replaceChild(img, sv); };
+      img.src = im.cross;
+    }
+  }
+})();
 
 /* ---------- go ---------- */
 setLang("en");
