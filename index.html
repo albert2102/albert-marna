@@ -249,6 +249,12 @@ body[data-lang="en"] .arch .inv{font-size:14px;letter-spacing:.16em;text-transfo
 body[data-lang="en"] .who h3{font-family:var(--en-display);font-size:36px;line-height:1.25}
 .fathers{display:flex;justify-content:center;gap:8px;margin:20px 0 0;flex-wrap:wrap}
 .fathers div{flex:1 1 150px;min-width:145px}
+.fathers .v{white-space:nowrap}
+body[data-lang="en"] .fathers .v{font-size:clamp(13.5px,4.2vw,17px)}
+@media (max-width:470px){
+  .fathers{flex-direction:column;gap:16px}
+  .fathers div{width:100%;min-width:0;flex:none}
+}
 .fathers .k{font-size:16px;color:var(--rose-deep);margin:0 0 2px}
 .fathers .v{font-size:17px;margin:0;line-height:1.8;color:#2C4159}
 
