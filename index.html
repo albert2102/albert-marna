@@ -155,13 +155,41 @@ body[data-lang="en"] h2.title{font-family:var(--en-display);font-size:40px;line-
   background:linear-gradient(180deg,rgba(244,248,252,.8),rgba(244,248,252,.18) 16%,rgba(244,248,252,0) 30%,
              rgba(244,248,252,0) 70%,rgba(244,248,252,.22) 84%,rgba(244,248,252,.8));
 }
+#admin{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;background:rgba(21,43,71,.55);padding:18px}
+.ad-card{background:var(--blush1);border:1px solid var(--gold);border-radius:10px 26px 10px 26px;
+  padding:22px 20px;max-width:min(460px,94vw);width:100%;max-height:86vh;overflow:auto;direction:rtl;text-align:right}
+.ad-card h3{margin:0 0 4px;font-size:24px;font-weight:400;font-family:var(--ar-display);color:var(--rose-ink)}
+.ad-sum{margin:0 0 14px;color:var(--rose-deep);font-size:16px}
+.ad-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.ad-row{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;
+  padding:10px 12px;border:1px solid rgba(198,217,236,.9);border-radius:8px;background:rgba(255,255,255,.7)}
+.ad-row b{font-size:18px}
+.ad-row span{color:var(--rose-deep);font-size:15px}
+.ad-row small{color:var(--muted);font-size:13px;margin-inline-start:auto}
+.ad-empty{color:var(--muted);text-align:center;padding:16px 0}
+.ad-acts{display:flex;gap:8px;flex-wrap:wrap}
+.ad-acts .btn{flex:1;justify-content:center;font-size:16px;padding:10px 14px}
 .sound-btn{
   position:absolute;z-index:5;right:10px;bottom:10px;width:40px;height:40px;border-radius:50%;
   display:grid;place-items:center;cursor:pointer;color:#152B47;
   background:rgba(255,253,248,.9);border:1px solid var(--gold);
   box-shadow:0 4px 12px rgba(21,43,71,.22);transition:transform .18s ease,background .25s ease;
 }
-html[dir="rtl"] .sound-btn{right:auto;left:10px}
+html[dir="rtl"] #admin{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;background:rgba(21,43,71,.55);padding:18px}
+.ad-card{background:var(--blush1);border:1px solid var(--gold);border-radius:10px 26px 10px 26px;
+  padding:22px 20px;max-width:min(460px,94vw);width:100%;max-height:86vh;overflow:auto;direction:rtl;text-align:right}
+.ad-card h3{margin:0 0 4px;font-size:24px;font-weight:400;font-family:var(--ar-display);color:var(--rose-ink)}
+.ad-sum{margin:0 0 14px;color:var(--rose-deep);font-size:16px}
+.ad-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.ad-row{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;
+  padding:10px 12px;border:1px solid rgba(198,217,236,.9);border-radius:8px;background:rgba(255,255,255,.7)}
+.ad-row b{font-size:18px}
+.ad-row span{color:var(--rose-deep);font-size:15px}
+.ad-row small{color:var(--muted);font-size:13px;margin-inline-start:auto}
+.ad-empty{color:var(--muted);text-align:center;padding:16px 0}
+.ad-acts{display:flex;gap:8px;flex-wrap:wrap}
+.ad-acts .btn{flex:1;justify-content:center;font-size:16px;padding:10px 14px}
+.sound-btn{right:auto;left:10px}
 .sound-btn:active{transform:scale(.92)}
 .sound-btn .off{display:none}
 .sound-btn.muted .on{display:none}
@@ -1023,198 +1051,87 @@ $("#yesno").addEventListener("click", function(ev){
 $("#send").addEventListener("click", function(){
   var name = $("#guest").value.trim();
   if (!name){ $("#guest").focus(); $("#guest").style.borderColor = "#B3402F"; return; }
-  var seats = coming ? " — " + (lang === "ar" ? "عدد الأفراد" : "Guests") + ": " + $("#seats").value : "";
-  var body = T.msg[lang] + "\n" + name + "\n" + (coming ? T.yes[lang] : T.no[lang]) + seats;
-  window.open("https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(body), "_blank");
-  dlg.close ? dlg.close() : dlg.removeAttribute("open");
+  var entry = {
+    name: name,
+    coming: coming,
+    seats: coming ? (parseInt($("#seats").value, 10) || 1) : 0,
+    at: new Date().toISOString()
+  };
+  saveRSVP(entry);
+  showThanks(name);
 });
 
-
-/* ---------- falling petals ---------- */
-var PETAL_COLORS = ["#E8D49B","#E3EDF7","#FFFFFF","#C6D9EC","#EAF1F9"];
-function petalSvg(color, w){
-  return '<svg viewBox="0 0 20 26" width="'+w+'" height="'+Math.round(w*1.3)+'" aria-hidden="true">'+
-         '<path d="M10 0C4 7.5 0 13.5 0 18a10 10 0 0020 0c0-4.5-4-10.5-10-18Z" fill="'+color+'" opacity=".9"/></svg>';
+/* ---------- التخزين المحلي للردود ---------- */
+var RSVP_KEY = "am_rsvp_v1";
+var rsvpMem = [];
+function loadRSVP(){
+  try {
+    var raw = window.localStorage.getItem(RSVP_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e){ return rsvpMem; }
 }
-var REDUCE = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-(function makePetals(){
-  var layer = document.getElementById("petals");
-  if (!layer || REDUCE) return;
-  var n = (window.innerWidth < 480) ? 12 : 18;
-  for (var i=0; i<n; i++){
-    var el = document.createElement("div");
-    el.className = "petal";
-    var w = 8 + Math.random()*10;
-    el.innerHTML = petalSvg(PETAL_COLORS[i % PETAL_COLORS.length], w.toFixed(0));
-    el.style.left = (Math.random()*100).toFixed(2) + "%";
-    el.style.animationDuration = (13 + Math.random()*11).toFixed(1) + "s";
-    el.style.animationDelay = "-" + (Math.random()*22).toFixed(1) + "s";
-    el.style.opacity = (0.45 + Math.random()*0.45).toFixed(2);
-    layer.appendChild(el);
-  }
-})();
-
-/* ---------- petal burst when the seal is pressed ---------- */
-function petalBurst(x, y){
-  for (var i=0; i<20; i++){
-    var el = document.createElement("div");
-    el.className = "pburst";
-    el.innerHTML = petalSvg(PETAL_COLORS[i % PETAL_COLORS.length], 10 + Math.floor(Math.random()*9));
-    var ang = (Math.PI*2) * (i/20) + Math.random()*0.4;
-    var dist = 90 + Math.random()*170;
-    el.style.left = x + "px";
-    el.style.top = y + "px";
-    el.style.setProperty("--bx", Math.cos(ang)*dist + "px");
-    el.style.setProperty("--by", (Math.sin(ang)*dist + 60) + "px");
-    el.style.setProperty("--br", (Math.random()*720 - 360).toFixed(0) + "deg");
-    el.style.animationDelay = (Math.random()*0.18).toFixed(2) + "s";
-    document.body.appendChild(el);
-    setTimeout(function(node){ return function(){ if (node.parentNode) node.parentNode.removeChild(node); }; }(el), 1600);
-  }
+function saveRSVP(entry){
+  var all = loadRSVP();
+  all.push(entry);
+  try { window.localStorage.setItem(RSVP_KEY, JSON.stringify(all)); }
+  catch(e){ rsvpMem = all; }
+}
+function showThanks(name){
+  var box = $("#dlg");
+  box.innerHTML = '<h3>' + (lang === "ar" ? "وصلنا ردّك" : "Thank you") + '</h3>' +
+    '<p class="sub">' + (lang === "ar" ? ("شكرًا " + name + " — تم تسجيل ردّك") : ("Thanks " + name + " — your reply is recorded")) + '</p>' +
+    '<div class="dlg-acts"><button type="button" class="btn solid" id="thx-close">' +
+    (lang === "ar" ? "تمام" : "Close") + '</button></div>';
+  var btn = document.getElementById("thx-close");
+  if (btn) btn.addEventListener("click", function(){ location.reload(); });
 }
 
-/* ---------- parallax hero + scroll progress ---------- */
-(function(){
-  var art = document.querySelector(".portrait");
-  var txt = document.querySelector(".hero-txt");
-  var cue = document.querySelector(".scroll-cue");
-  var bar = document.getElementById("progress");
-  var queued = false;
-  function frame(){
-    queued = false;
-    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    if (bar) bar.style.width = (h > 0 ? Math.min(100, (y/h)*100) : 0) + "%";
-    var vh = window.innerHeight || 700;
-    if (y < vh*1.2){
-      if (art) art.style.transform = "translate3d(0," + (y*-0.06).toFixed(1) + "px,0) scale(" + (1 - y/vh*0.05).toFixed(3) + ")";
-      if (txt){
-        txt.style.transform = "translate3d(0," + (y*0.12).toFixed(1) + "px,0)";
-        txt.style.opacity = Math.max(0, 1 - y/(vh*0.62)).toFixed(2);
-      }
-      if (cue) cue.style.opacity = Math.max(0, 1 - y/220).toFixed(2);
-    }
-  }
-  if (REDUCE) { if (bar) bar.style.display = "none"; return; }
-  window.addEventListener("scroll", function(){
-    if (!queued){ queued = true; requestAnimationFrame(frame); }
-  }, {passive:true});
-  frame();
-})();
-
-/* ---------- timeline draw-in ---------- */
-(function(){
-  var tl = document.querySelector(".tl");
-  if (!tl) return;
-  var stops = $$(".stop");
-  function play(){
-    tl.classList.add("grow");
-    stops.forEach(function(st, i){ setTimeout(function(){ st.classList.add("in"); }, 350 + i*260); });
-  }
-  if (!("IntersectionObserver" in window)){ play(); return; }
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if (e.isIntersecting){ play(); io.unobserve(e.target); } });
-  }, {threshold:.25});
-  io.observe(tl);
-})();
-
-/* ---------- floating hearts in the footer ---------- */
-(function(){
-  var f = document.querySelector("footer");
-  if (!f) return;
-  var heart = '<svg width="14" height="12" viewBox="0 0 30 26" fill="currentColor"><path d="M15 22C10 17 4 14 4 9.5 4 6 6.7 4 9.4 4c2 0 4 1.1 5.6 3.3C16.6 5.1 18.6 4 20.6 4 23.3 4 26 6 26 9.5 26 14 20 17 15 22Z"/></svg>';
-  for (var i=0; i<7; i++){
-    var el = document.createElement("span");
-    el.className = "fheart";
-    el.innerHTML = heart;
-    el.style.left = (8 + Math.random()*84).toFixed(1) + "%";
-    el.style.animationDuration = (5 + Math.random()*4).toFixed(1) + "s";
-    el.style.animationDelay = (Math.random()*6).toFixed(1) + "s";
-    f.appendChild(el);
-  }
-})();
-
-
-/* ---------- real photos (if provided in CONFIG.images) ---------- */
-(function(){
-  var im = CONFIG.images || {};
-
-  if (CONFIG.video){
-    var v = document.getElementById("hero-video");
-    if (v){
-      window.__heroVideo = v;
-      v.addEventListener("loadeddata", function(){
-        v.hidden = false;                          // الفيديو جوه القوس
-        var sb = document.getElementById("sound-btn");
-        if (sb) sb.hidden = false;
-        var art = document.querySelector(".portrait-art");
-        if (art) art.style.display = "none";
-        v.pause();                                 // مستني لحد ما الظرف يتفتح
-        try { v.currentTime = 0; } catch(e){}
-      });
-      v.addEventListener("ended", function(){      // يقف على آخر فريم ومايكررش
-        try { v.pause(); v.currentTime = Math.max(0, v.duration - 0.05); } catch(e){}
-      });
-      v.addEventListener("error", function(){ v.hidden = true; });
-
-      var sb = document.getElementById("sound-btn");
-      if (sb){
-        function syncBtn(){ sb.classList.toggle("muted", v.muted); }
-        sb.addEventListener("click", function(){
-          if (v.muted){
-            v.muted = false;
-            if (v.ended || v.currentTime >= v.duration - 0.1) v.currentTime = 0;
-            v.play().catch(function(){});
-          } else {
-            v.muted = true;
-          }
-          syncBtn();
-        });
-        syncBtn();
-      }
-      var vs = (typeof CONFIG.video === "string") ? {mp4:CONFIG.video} : CONFIG.video;
-      if (vs.mp4){
-        var s1 = document.createElement("source");
-        s1.src = vs.mp4; s1.type = "video/mp4"; v.appendChild(s1);
-      }
-      if (vs.webm){
-        var s2 = document.createElement("source");
-        s2.src = vs.webm; s2.type = "video/webm"; v.appendChild(s2);
-      }
-      v.load();
-    }
-  }
-  if (im.hero){
-    var h = document.getElementById("hero-img");
-    if (h){
-      h.onload = function(){
-        h.hidden = false;
-        var art = document.querySelector(".portrait-art");
-        if (art) art.style.display = "none";
-      };
-      h.onerror = function(){ h.hidden = true; };
-      h.src = im.hero;
-    }
-  }
-  if (im.church){
-    var ch = document.getElementById("church-img");
-    if (ch){
-      ch.onload = function(){ ch.hidden = false; };
-      ch.onerror = function(){ ch.hidden = true; };
-      ch.src = im.church;
-    }
-  }
-  if (im.cross){
-    var sv = document.querySelector(".cross");
-    if (sv){
-      var img = document.createElement("img");
-      img.className = "cross-img";
-      img.alt = "";
-      img.onload = function(){ sv.parentNode.replaceChild(img, sv); };
-      img.src = im.cross;
-    }
-  }
-})();
+/* ---------- لوحة الردود: افتح اللينك وزوّد ?admin في آخره ---------- */
+function toCSV(rows){
+  var head = "name,attending,guests,at\n";
+  return head + rows.map(function(r){
+    return '"' + String(r.name).replace(/"/g,'""') + '",' + (r.coming ? "yes" : "no") + "," + r.seats + "," + r.at;
+  }).join("\n");
+}
+function openAdmin(){
+  var all = loadRSVP();
+  var going = all.filter(function(r){ return r.coming; });
+  var heads = going.reduce(function(n,r){ return n + (r.seats || 1); }, 0);
+  var wrap = document.createElement("div");
+  wrap.id = "admin";
+  wrap.innerHTML =
+    '<div class="ad-card">' +
+      '<h3>الردود (' + all.length + ')</h3>' +
+      '<p class="ad-sum">هيحضر: ' + going.length + ' رد — إجمالي الأفراد: ' + heads + '</p>' +
+      '<div class="ad-list">' +
+        (all.length ? all.map(function(r){
+          return '<div class="ad-row"><b>' + r.name + '</b>' +
+                 '<span>' + (r.coming ? ("هيحضر — " + r.seats) : "معتذر") + '</span>' +
+                 '<small>' + new Date(r.at).toLocaleString() + '</small></div>';
+        }).join("") : '<p class="ad-empty">لسه مفيش ردود على الجهاز ده</p>') +
+      '</div>' +
+      '<div class="ad-acts">' +
+        '<button type="button" class="btn" id="ad-csv">تحميل CSV</button>' +
+        '<button type="button" class="btn" id="ad-clear">مسح الكل</button>' +
+        '<button type="button" class="btn solid" id="ad-close">إغلاق</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(wrap);
+  document.getElementById("ad-close").onclick = function(){ wrap.remove(); };
+  document.getElementById("ad-csv").onclick = function(){
+    var url = URL.createObjectURL(new Blob(["\ufeff" + toCSV(loadRSVP())], {type:"text/csv;charset=utf-8"}));
+    var a = document.createElement("a");
+    a.href = url; a.download = "rsvp-albert-merna.csv"; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  };
+  document.getElementById("ad-clear").onclick = function(){
+    if (!confirm("متأكد إنك عايز تمسح كل الردود؟")) return;
+    try { window.localStorage.removeItem(RSVP_KEY); } catch(e){}
+    rsvpMem = [];
+    wrap.remove(); openAdmin();
+  };
+}
+if (/[?&]admin/.test(location.search)) setTimeout(openAdmin, 400);
 
 /* ---------- go ---------- */
 setLang("en");
